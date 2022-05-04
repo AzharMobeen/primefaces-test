@@ -13,7 +13,28 @@
 
         <h1>#{testView.string}</h1>
         <h:form id="frmTest">
-            
+            <p:growl id="messages" showDetail="true"/>
+            <p:dataTable value="#{testView.userList}" var="user">
+                <f:facet name="header">
+                    Users
+                </f:facet>
+                <p:column headerText="Full Name">
+                    <h:outputText value="#{user.fullName}"/>
+                </p:column>
+                <p:column headerText="Age">
+                    <h:outputText value="#{user.age}"/>
+                </p:column>
+                <p:column>
+                    <p:speedDial direction="up" transitionDelay="80" showIcon="pi pi-bars" hideIcon="pi pi-times"
+                                 buttonStyleClass="ui-button-outlined">
+                        <p:menuitem icon="pi pi-pencil" action="#{testView.add}" update=":frmTest:messages"/>
+                        <p:menuitem icon="pi pi-refresh" action="#{testView.update}" update=":frmTest:messages"/>
+                        <p:menuitem icon="pi pi-trash" action="#{testView.delete}" update=":frmTest:messages"/>
+                        <p:menuitem icon="pi pi-upload" outcome="/test"/>
+                        <p:menuitem icon="pi pi-external-link" url="https://www.primefaces.org"/>
+                    </p:speedDial>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </h:body>
